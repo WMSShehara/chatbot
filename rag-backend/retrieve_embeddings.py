@@ -27,30 +27,3 @@ def retrieve_similar_chunks(query: str, index: faiss.Index, chunks: List[str], m
     similar_chunks = [chunks[i] for i in indices[0]]
     return similar_chunks, distances[0]
 
-if __name__ == "__main__":
-    # Example usage
-    from embed_text import load_model
-    from store_embeddings import load_embeddings
-
-    # Path to your saved FAISS index and chunks file
-    index_file = "embeddings_store.faiss"
-    chunks_file = "embeddings_store_chunks.npy"
-
-    # Load model
-    model = load_model()
-
-    # Load the FAISS index and chunks
-    index, loaded_chunks = load_embeddings(index_file, chunks_file)
-
-    # Query input from the user
-    query = input("Enter your query: ")
-
-    # Retrieve similar chunks
-    similar_chunks, distances = retrieve_similar_chunks(query, index, loaded_chunks, model)
-
-    # Display the results
-    print("Top similar chunks:")
-    for i, (chunk, dist) in enumerate(zip(similar_chunks, distances)):
-        print(f"Rank {i + 1}:")
-        print(f"Chunk: {chunk}")
-        print(f"Distance: {dist}")

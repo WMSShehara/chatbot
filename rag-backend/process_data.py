@@ -28,13 +28,3 @@ def split_into_chunks(text: str, chunk_size: int = 100, overlap: int = 20) -> Li
         chunks.append(chunk)
     return chunks
 
-# test the functions
-if __name__ == "__main__":
-    pdf_path = "BioResoBook.pdf"  # Replace with your file path
-    raw_text = extract_text_pymupdf(pdf_path)
-    cleaned_text = clean_text(raw_text)
-    chunks = split_into_chunks(cleaned_text)
-    
-    print(f"Extracted Text:\n{raw_text[:500]}")  # Print first 500 characters
-    print(f"Cleaned Text:\n{cleaned_text[:500]}")  # Print first 500 characters
-    print(f"Chunks:\n{chunks[:3]}")  # Print first 3 chunks

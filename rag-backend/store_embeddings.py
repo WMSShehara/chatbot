@@ -38,28 +38,3 @@ def load_embeddings(index_file: str, chunks_file: str):
     chunks = np.load(chunks_file, allow_pickle=True)
     return index, chunks
 
-# test the functions
-if __name__ == "__main__":
-    # Example usage
-    from embed_text import generate_embeddings, load_model
-    from process_data import extract_text_pymupdf, clean_text, split_into_chunks
-
-    # Path to PDF
-    pdf_path = "BioResoBook.pdf"
-
-    # Preprocess text
-    raw_text = extract_text_pymupdf(pdf_path)
-    cleaned_text = clean_text(raw_text)
-    chunks = split_into_chunks(cleaned_text)
-
-    # Generate embeddings
-    model = load_model()
-    embeddings = generate_embeddings(chunks, model)
-
-    # Store embeddings
-    output_file = "embeddings_store"
-    store_embeddings(embeddings, chunks, output_file)
-
-    # Load embeddings
-    index, loaded_chunks = load_embeddings(f"{output_file}.faiss", f"{output_file}_chunks.npy")
-    print(f"Loaded {len(loaded_chunks)} chunks from {output_file}.")
