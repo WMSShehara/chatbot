@@ -22,22 +22,3 @@ def generate_embeddings(chunks: List[str], model: SentenceTransformer) -> np.nda
     embeddings = model.encode(chunks, convert_to_numpy=True)
     return embeddings
 
-# test the functions
-if __name__ == "__main__":
-    # Example usage
-    from process_data import extract_text_pymupdf, clean_text, split_into_chunks
-    
-    # Path to your PDF
-    pdf_path = "BioResoBook.pdf"
-    
-    # Preprocess the text
-    raw_text = extract_text_pymupdf(pdf_path)
-    cleaned_text = clean_text(raw_text)
-    chunks = split_into_chunks(cleaned_text)
-    
-    # Load the model and generate embeddings
-    model = load_model()
-    embeddings = generate_embeddings(chunks, model)
-    
-    # Display results
-    print(f"Generated {len(embeddings)} embeddings with shape {embeddings.shape}.")
