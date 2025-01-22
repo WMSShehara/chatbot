@@ -1,4 +1,28 @@
+# backend
 rag-backend/__pycache__/
 rag-backend/myenv/
 rag-backend/config.py
-rag-backend/node_modules/
+
+# frontend
+
+# dependencies
+rag-frontend/node_modules
+rag-frontend/.pnp
+rag-frontend/.pnp.js
+
+# testing
+rag-frontend/coverage
+
+# production
+rag-frontend/build
+
+# misc
+rag-frontend/.DS_Store
+rag-frontend/.env.local
+rag-frontend/.env.development.local
+rag-frontend/.env.test.local
+rag-frontend/.env.production.local
+
+rag-frontend/npm-debug.log*
+rag-frontend/yarn-debug.log*
+rag-frontend/yarn-error.log*
