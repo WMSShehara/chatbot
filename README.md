@@ -4,12 +4,11 @@ This individual project implements a Retrieve-and-Generate (RAG) application for
 
 ## Table of content
 
-[Installation-Run Locally](##Installation-Run Locally)
-[Components](##Components)
-[API Reference](##API Reference)
-[API Reference](##API Reference)
+- [Installation and Run Locally](#installation-and-run-locally)
+- [Components](#components)
+- [API Reference](#API-reference)
 
-## Installation - Run Locally
+## Installation-and-run-locally
 
 ### Backend
 
@@ -65,7 +64,7 @@ This individual project implements a Retrieve-and-Generate (RAG) application for
 - retrieve_embedings.py : retrieve the top and most similar chuns for a given query.
 - generate_answer.py : generate answer based on the retrieved context using GPT
 
-## API Reference
+## API-reference
 
 ### File upload
 
