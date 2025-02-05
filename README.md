@@ -1,6 +1,6 @@
-# ASKPDF - Retrieve-and-Generate Application (RAG)
+# ASKPDF - Retrieval-Augmented Generation Application (RAG)
 
-This individual project implements a Retrieve-and-Generate (RAG) application for answering user queries based on uploaded documents. The application consists of a FastAPI backend and a React frontend, enabling users to upload documents, generate embeddings, and retrieve answers to their queries.
+This individual project implements a Retrieval-Augmented Generation (RAG) application for answering user queries based on uploaded documents. The application consists of a FastAPI backend and a React frontend, enabling users to upload documents, generate embeddings, and retrieve answers to their queries.
 
 ## Table of content
 
