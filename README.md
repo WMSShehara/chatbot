@@ -24,7 +24,7 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
 - **API Documentation**: Swagger/OpenAPI
 
 ### RAG Pipeline
-- **LLM Integration**: OpenAI GPT
+- **LLM Integration**: Google Gemini Pro
 - **Embeddings**: Sentence-Transformers
 - **Vector Storage**: FAISS
 - **Document Processing**: 
@@ -46,7 +46,7 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
 
 ### Backend
 
-1. clone the repository
+1. Clone the repository
 ```bash
     git clone <repository_url>
     cd rag-backend
@@ -60,11 +60,11 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
 ```bash
     pip install -r requirements.txt
 ``` 
-4. Create config.py and include OPENAI_API_KEY : 
+4. Create config.py and include Gemini API key: 
 ```bash
-    OPENAI_API_KEY="your OPENAI_API_KEY"
+    Gemini_API_KEY="your-gemini-api-key-here"
 ```
-5.   Run the Backend: 
+5. Run the Backend: 
 ```bash
     uvicorn main:app --reload
 ```
@@ -93,7 +93,7 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
 ### Backend components
 
 - **process_data.py**: Document Processing Pipeline
-  - PyPDF2: Extract text from PDF files
+  - PyPDF: Extract text from PDF files
   - Regular Expressions (re): Clean and sanitize text
   - LangChain Text Splitter: Split documents into manageable chunks
   - NumPy: Handle text arrays and numerical operations
@@ -117,8 +117,8 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
   - Heapq: Manage top-k similar chunks
 
 - **generate_answer.py**: Answer Generation
-  - OpenAI GPT: Generate contextual answers
-  - LangChain: Orchestrate the RAG pipeline
+  - Google Gemini Pro: Generate contextual answers
+  - google.generativeai: Gemini API integration
   - Prompt Templates: Structure system and user prompts
   - JSON: Handle API responses
 
