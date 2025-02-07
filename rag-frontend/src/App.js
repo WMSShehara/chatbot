@@ -4,7 +4,7 @@ import Page from './Page'
 function App () {
   return (
     <div>
-      <h1>RAG App</h1>
+      <h1>ASK PDF</h1>
       <Page />
     </div>
   )
