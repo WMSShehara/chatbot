@@ -4,9 +4,43 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
 
 ## Table of content
 
+- [Tech Stack](#tech-stack)
 - [Installation and Run Locally](#installation-and-run-locally)
 - [Components](#components)
 - [API Reference](#API-reference)
+
+## Tech Stack
+
+### Frontend
+- **Framework**: React.js
+- **UI Components**: Material-UI (MUI)
+- **HTTP Client**: Axios
+- **State Management**: React Hooks
+- **Styling**: CSS Modules
+
+### Backend
+- **Framework**: FastAPI
+- **ASGI Server**: Uvicorn
+- **API Documentation**: Swagger/OpenAPI
+
+### RAG Pipeline
+- **LLM Integration**: OpenAI GPT
+- **Embeddings**: Sentence-Transformers
+- **Vector Storage**: FAISS
+- **Document Processing**: 
+  - PyPDF (PDF processing)
+  - Pandas (Data handling)
+  - NumPy (Numerical operations)
+
+### Development Tools
+- **Environment Management**: 
+  - Python: venv
+  - Node.js: npm
+- **API Validation**: Pydantic
+- **Version Control**: Git
+- **Code Formatting**: 
+  - Python: Black
+  - JavaScript: Prettier
 
 ## Installation-and-run-locally
 
@@ -58,11 +92,41 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
 
 ### Backend components
 
-- process_data.py : extract text from file, remove the unnecessary special characters and white spaces and split into chunks.
-- embed_text.py : generate embeddings for a list of text chunks and load the pre trained sentence tranformer model
-- store_embeddings.py : store embeddings and their associated chunks in FAISS index and load the FAISS index and associated chunks.
-- retrieve_embedings.py : retrieve the top and most similar chuns for a given query.
-- generate_answer.py : generate answer based on the retrieved context using GPT
+- **process_data.py**: Document Processing Pipeline
+  - PyPDF2: Extract text from PDF files
+  - Regular Expressions (re): Clean and sanitize text
+  - LangChain Text Splitter: Split documents into manageable chunks
+  - NumPy: Handle text arrays and numerical operations
+
+- **embed_text.py**: Embedding Generation
+  - Sentence-Transformers: Generate text embeddings
+  - Model: 'all-MiniLM-L6-v2' for efficient text embedding
+  - NumPy: Handle embedding vectors
+  - Torch: Backend for transformer models
+
+- **store_embeddings.py**: Vector Storage
+  - FAISS: High-performance similarity search
+  - NumPy: Vector operations and data handling
+  - Pickle: Serialize and store index data
+  - OS: File handling and path management
+
+- **retrieve_embeddings.py**: Similarity Search
+  - FAISS: Vector similarity search
+  - NumPy: Vector operations
+  - Sentence-Transformers: Query embedding generation
+  - Heapq: Manage top-k similar chunks
+
+- **generate_answer.py**: Answer Generation
+  - OpenAI GPT: Generate contextual answers
+  - LangChain: Orchestrate the RAG pipeline
+  - Prompt Templates: Structure system and user prompts
+  - JSON: Handle API responses
+
+- **main.py**: API Endpoints
+  - FastAPI: Web framework
+  - Pydantic: Request/response validation
+  - Uvicorn: ASGI server
+  - Python-multipart: Handle file uploads
 
 ## API-reference
 
@@ -88,7 +152,6 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
   "file_path": "path_to_uploaded_file"
 }
 ```
-
 
 #### Ask a question
 
