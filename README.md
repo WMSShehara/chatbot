@@ -1,18 +1,52 @@
-# ASKPDF - Retrieve-and-Generate Application (RAG)
+# ASKPDF - Retrieval-Augmented Generation Application (RAG)
 
-This individual project implements a Retrieve-and-Generate (RAG) application for answering user queries based on uploaded documents. The application consists of a FastAPI backend and a React frontend, enabling users to upload documents, generate embeddings, and retrieve answers to their queries.
+This individual project implements a Retrieval-Augmented Generation (RAG) application for answering user queries based on uploaded documents. The application consists of a FastAPI backend and a React frontend, enabling users to upload documents, generate embeddings, and retrieve answers to their queries.
 
 ## Table of content
 
+- [Tech Stack](#tech-stack)
 - [Installation and Run Locally](#installation-and-run-locally)
 - [Components](#components)
 - [API Reference](#API-reference)
+
+## Tech Stack
+
+### Frontend
+- **Framework**: React.js
+- **UI Components**: Material-UI (MUI)
+- **HTTP Client**: Axios
+- **State Management**: React Hooks
+- **Styling**: CSS Modules
+
+### Backend
+- **Framework**: FastAPI
+- **ASGI Server**: Uvicorn
+- **API Documentation**: Swagger/OpenAPI
+
+### RAG Pipeline
+- **LLM Integration**: Google Gemini Pro
+- **Embeddings**: Sentence-Transformers
+- **Vector Storage**: FAISS
+- **Document Processing**: 
+  - PyPDF (PDF processing)
+  - Pandas (Data handling)
+  - NumPy (Numerical operations)
+
+### Development Tools
+- **Environment Management**: 
+  - Python: venv
+  - Node.js: npm
+- **API Validation**: Pydantic
+- **Version Control**: Git
+- **Code Formatting**: 
+  - Python: Black
+  - JavaScript: Prettier
 
 ## Installation-and-run-locally
 
 ### Backend
 
-1. clone the repository
+1. Clone the repository
 ```bash
     git clone <repository_url>
     cd rag-backend
@@ -26,11 +60,11 @@ This individual project implements a Retrieve-and-Generate (RAG) application for
 ```bash
     pip install -r requirements.txt
 ``` 
-4. Create config.py and include OPENAI_API_KEY : 
+4. Create config.py and include Gemini API key: 
 ```bash
-    OPENAI_API_KEY="your OPENAI_API_KEY"
+    Gemini_API_KEY="your-gemini-api-key-here"
 ```
-5.   Run the Backend: 
+5. Run the Backend: 
 ```bash
     uvicorn main:app --reload
 ```
@@ -58,11 +92,41 @@ This individual project implements a Retrieve-and-Generate (RAG) application for
 
 ### Backend components
 
-- process_data.py : extract text from file, remove the unnecessary special characters and white spaces and split into chunks.
-- embed_text.py : generate embeddings for a list of text chunks and load the pre trained sentence tranformer model
-- store_embeddings.py : store embeddings and their associated chunks in FAISS index and load the FAISS index and associated chunks.
-- retrieve_embedings.py : retrieve the top and most similar chuns for a given query.
-- generate_answer.py : generate answer based on the retrieved context using GPT
+- **process_data.py**: Document Processing Pipeline
+  - PyPDF: Extract text from PDF files
+  - Regular Expressions (re): Clean and sanitize text
+  - LangChain Text Splitter: Split documents into manageable chunks
+  - NumPy: Handle text arrays and numerical operations
+
+- **embed_text.py**: Embedding Generation
+  - Sentence-Transformers: Generate text embeddings
+  - Model: 'all-MiniLM-L6-v2' for efficient text embedding
+  - NumPy: Handle embedding vectors
+  - Torch: Backend for transformer models
+
+- **store_embeddings.py**: Vector Storage
+  - FAISS: High-performance similarity search
+  - NumPy: Vector operations and data handling
+  - Pickle: Serialize and store index data
+  - OS: File handling and path management
+
+- **retrieve_embeddings.py**: Similarity Search
+  - FAISS: Vector similarity search
+  - NumPy: Vector operations
+  - Sentence-Transformers: Query embedding generation
+  - Heapq: Manage top-k similar chunks
+
+- **generate_answer.py**: Answer Generation
+  - Google Gemini Pro: Generate contextual answers
+  - google.generativeai: Gemini API integration
+  - Prompt Templates: Structure system and user prompts
+  - JSON: Handle API responses
+
+- **main.py**: API Endpoints
+  - FastAPI: Web framework
+  - Pydantic: Request/response validation
+  - Uvicorn: ASGI server
+  - Python-multipart: Handle file uploads
 
 ## API-reference
 
@@ -88,7 +152,6 @@ This individual project implements a Retrieve-and-Generate (RAG) application for
   "file_path": "path_to_uploaded_file"
 }
 ```
-
 
 #### Ask a question
 

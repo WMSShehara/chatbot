@@ -1,30 +1,40 @@
+from pypdf import PdfReader
 import re
-import fitz
 from typing import List
 
-# Extract text from a PDF file
-def extract_text_pymupdf(pdf_path:str)->str:
-    doc = fitz.open(pdf_path)
+def extract_text_from_pdf(file_path: str) -> str:
+    """Extract text from PDF using pdf."""
+    reader = PdfReader(file_path)
     text = ""
-    for page_num, page in enumerate(doc, start=1):
-        text += f"Page {page_num}:\n"
-        text += page.get_text() + "\n"
+    for page in reader.pages:
+        text += page.extract_text() + "\n"
     return text
 
-def clean_text(text:str)->str:
-    # Remove special characters
-    text = re.sub(r"[^a-zA-Z0-9\s.,!?-]", "", text)
-    # Replace multiple spaces with a single space
-    text = re.sub(r"\s+", " ", text)
-    # Strip leading/trailing whitespace
-    text = text.strip()
-    return text
+def clean_text(text: str) -> str:
+    """Clean and normalize text."""
+    # Remove extra whitespace and newlines
+    text = re.sub(r'\s+', ' ', text)
+    # Remove special characters but keep periods and commas
+    text = re.sub(r'[^a-zA-Z0-9\s.,]', '', text)
+    return text.strip()
 
-def split_into_chunks(text: str, chunk_size: int = 100, overlap: int = 20) -> List[str]:
-    words = text.split()
+def split_into_chunks(text: str, chunk_size: int = 1000) -> List[str]:
+    """Split text into chunks of approximately equal size."""
+    # Split text into sentences
+    sentences = re.split(r'(?<=[.!?])\s+', text)
     chunks = []
-    for i in range(0, len(words), chunk_size - overlap):
-        chunk = " ".join(words[i : i + chunk_size])
-        chunks.append(chunk)
+    current_chunk = ""
+    
+    for sentence in sentences:
+        if len(current_chunk) + len(sentence) <= chunk_size:
+            current_chunk += " " + sentence if current_chunk else sentence
+        else:
+            if current_chunk:
+                chunks.append(current_chunk.strip())
+            current_chunk = sentence
+            
+    if current_chunk:
+        chunks.append(current_chunk.strip())
+        
     return chunks
 

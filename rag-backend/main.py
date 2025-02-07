@@ -1,6 +1,6 @@
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
-from process_data import extract_text_pymupdf, clean_text, split_into_chunks
+from process_data import extract_text_from_pdf, clean_text, split_into_chunks
 from embed_text import load_model, generate_embeddings
 from store_embeddings import store_embeddings, load_embeddings
 from retrieve_embeddings import retrieve_similar_chunks
@@ -38,7 +38,7 @@ async def upload_file(file: UploadFile = File(...)):
             f.write(await file.read())
 
         # Extract and process the file's text
-        raw_text = extract_text_pymupdf(file_path)
+        raw_text = extract_text_from_pdf(file_path)
         cleaned_text = clean_text(raw_text)
         chunks = split_into_chunks(cleaned_text)
 
