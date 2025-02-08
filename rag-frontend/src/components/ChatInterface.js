@@ -3,12 +3,14 @@ import { FiSend } from 'react-icons/fi'
 import { Form, Button, Spinner } from 'react-bootstrap'
 import FileUpload from './FileUpload'
 import MessageList from './MessageList'
+import GraphVisualization from './GraphVisualization'
 
 function ChatInterface () {
   const [messages, setMessages] = useState([])
   const [query, setQuery] = useState('')
   const [currentFile, setCurrentFile] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [graphData, setGraphData] = useState(null)
 
   const handleSendMessage = async () => {
     if (!query.trim()) return
@@ -32,6 +34,7 @@ function ChatInterface () {
 
       const data = await response.json()
       setMessages(prev => [...prev, { text: data.answer, sender: 'bot' }])
+      setGraphData(data.graph_data)
     } catch (error) {
       alert('Failed to get response')
     } finally {
@@ -47,9 +50,11 @@ function ChatInterface () {
         <FileUpload setCurrentFile={setCurrentFile} />
       </div>
 
+      {graphData && <GraphVisualization graphData={graphData} />}
+
       <div
         className='bg-white rounded p-3 shadow-sm flex-grow-1'
-        style={{ height: '75vh', overflowY: 'auto' }}
+        style={{ height: '50vh', overflowY: 'auto' }}
       >
         <MessageList messages={messages} />
       </div>
