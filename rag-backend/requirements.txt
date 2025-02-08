@@ -12,10 +12,13 @@ Pypdf2 # For PDF processing
 # pip3 install PyPDF2
 langchain>=0.0.300
 
-# RAG and LLM Dependencies
-sentence-transformers # pip3 install sentence-transformers
-faiss-cpu
-google.generativeai
+# Knowledge Graph Dependencies
+spacy>=3.0.0
+networkx>=2.6.0
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
+
+# LLM Dependencies
+google.generativeai>=0.3.0
 
 # Data Processing
 numpy>=1.21.0
