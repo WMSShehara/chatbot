@@ -145,13 +145,7 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
   Accepts a file for processing.
 ```
 #### Response:
-```http
-  {
-  "message": "File processed and embeddings stored successfully.",
-  "file_name": "uploaded_file_name",
-  "file_path": "path_to_uploaded_file"
-}
-```
+![API Response Screenshot](./images/uploadfile.jpg)
 
 #### Ask a question
 
@@ -173,12 +167,7 @@ This individual project implements a Retrieval-Augmented Generation (RAG) applic
     file_name: Name of the file for which embeddings were generated
 ```
 #### Response:
-```http
-{
-  "query": "Your question",
-  "answer": "Generated answer based on the document"
-}
-```
+![API Response Screenshot](./images/userquery.jpg)
 
 
 

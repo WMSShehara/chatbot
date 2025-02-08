@@ -1,3 +1,4 @@
+# uvicorn main:app --reload
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
 from process_data import extract_text_from_pdf, clean_text, split_into_chunks
@@ -25,6 +26,9 @@ model = load_model()
 # Directory to save uploaded files
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# test the api
+#http://127.0.0.1:8000/docs
 
 @app.post("/upload-file/")
 async def upload_file(file: UploadFile = File(...)):

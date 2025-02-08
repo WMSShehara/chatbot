@@ -8,12 +8,13 @@ pydantic>=1.8.2
 python-multipart>=0.0.5
 
 # Document Processing
-pypdf>=3.0.0  # For PDF processing
+Pypdf2 # For PDF processing
+# pip3 install PyPDF2
 langchain>=0.0.300
 
 # RAG and LLM Dependencies
-sentence-transformers>=2.2.0
-faiss-cpu>=1.7.4
+sentence-transformers # pip3 install sentence-transformers
+faiss-cpu
 google.generativeai
 
 # Data Processing
