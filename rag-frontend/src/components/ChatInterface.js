@@ -41,14 +41,15 @@ function ChatInterface () {
   }
 
   return (
-    <div className='d-flex flex-column gap-4'>
-      <h1 className='text-center mb-4'>PDF Chat Assistant</h1>
-
-      <FileUpload setCurrentFile={setCurrentFile} />
+    <div className='d-flex flex-column gap-4 h-100'>
+      <div className='d-flex justify-content-between align-items-center'>
+        <h1 className='mb-0 fs-2'>ASKPDF</h1>
+        <FileUpload setCurrentFile={setCurrentFile} />
+      </div>
 
       <div
-        className='bg-white rounded p-3 shadow-sm'
-        style={{ height: '60vh', overflowY: 'auto' }}
+        className='bg-white rounded p-3 shadow-sm flex-grow-1'
+        style={{ height: '75vh', overflowY: 'auto' }}
       >
         <MessageList messages={messages} />
       </div>
@@ -58,7 +59,7 @@ function ChatInterface () {
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder='Ask a question...'
-          onKeyPress={e => e.key === 'Enter' && handleSendMessage()}
+          onKeyDown={e => e.key === 'Enter' && handleSendMessage()}
         />
         <Button
           variant='primary'
